@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); //https://github.com/jan
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: __dirname + "/dist",
+        path: __dirname + "/build",
         filename: 'bundle.js'
     },
     plugins: [new HtmlWebpackPlugin()],
@@ -32,37 +32,3 @@ module.exports = {
         ]
     },
 };
-
-/*
-var webpack = require('webpack');
-var path = require('path');
-
-
-
-var config = {
-  entry: APP_DIR + '/index.jsx',
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
-  }
-};
-
-module.exports = config;
-*/
-
-/*
-const path = require('path');
-module.exports = {
-  entry: './client/index.js',
-  output: {
-    path: path.resolve('dist'),
-    filename: 'index_bundle.js'
-  },
-  module: {
-    loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ]
-  }
-}
-*/
