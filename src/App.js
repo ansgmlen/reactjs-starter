@@ -5,7 +5,6 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  withRouter,
   Link
 } from 'react-router-dom'
 import Home from './home/home';
@@ -46,7 +45,7 @@ class App extends Component {
     super(props); //super allows you to access the constructor method of the parent class. The only reason to include props is to access this.props inside of your constructor.
     this.state = {
       date: new Date(),
-      isLoggedIn:false
+      isLoggedIn:false,
     };
   }
   componentDidMount() {
@@ -56,8 +55,9 @@ class App extends Component {
   auth(){
     this.setState({isLoggedIn:false});
   }
-  openView(){
-    //window.open("http://localhost:3000/home", '_self', false); //open home
+  openView(_history){
+    _history.push('/login');
+    //window.open("http://localhost:3000/", '_self', false); //open home
 
   }
 
@@ -75,45 +75,27 @@ class App extends Component {
           <li><Link to="/login">Login</Link></li>
         </ul>
         <hr/>
-        <button onClick={()=> this.openView()} >button</button>
 
-          <Route exact path="/" component={Home}/>
-          <Route exact path='/login' component={Login} />
+        <Route exact path="/" component={Home}/>
+        <Route path="/login" component={Login}/>
+
+        <Route render={ ({history}) => (
+          <button type='button' onClick={() => this.openView(history)} >
+          Click Me!
+          </button>
+        )} />
+
+        <Route render={({ history}) => (
+          <button type='button' onClick={() => { history.push('/') }} >
+             Click Me2!
+          </button>
+        )} />
+
+
         </div>
       </Router>
-
-
-
     );
   }
 }
-
-/*
-<div className="App">
-  <Header />
-
-
-  <div>
-    <Route exact path='/login' component={Login} />
-  </div>
-
-  <div>
-    {isLoggedIn ? (<Home />) : (<Login />)}
-  </div>
-
-  <button onClick={()=> this.openView()} >button</button>
-
-  <div>
-    <Route exact path='/login' component={Login} />
-  </div>
-
-</div>
-</Router>
-
-<Router>
-<Route path="/login" component={Login}/>
-<Route path="/home" component={Home}/>
-</Router>
-*/
 
 export default App;
