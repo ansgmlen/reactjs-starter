@@ -1,11 +1,12 @@
-import restApi from '../shared/restApi';
+import {httpCall} from '../shared/restApi';
 
 /**
  * Get
  * @param -
  */
-exports.getBuildings = function(_params) {
-
+//export default function getUsers(_params) {
+var getUsers = (_params) => {
+//exports.getUsers = (_params) => {
   var params = {
     url: "https://randomuser.me/api/?page=" + 1 + "&results=20",
     httpObj: {
@@ -20,25 +21,7 @@ exports.getBuildings = function(_params) {
 
   }
 
-  return restApi.httpCall(params);
+  return httpCall(params);
 };
 
-/**
- * Making http call
- * @param - params{object}:url{string}, method{string}, headers{object}, body{object}
- */
- /*
-var httpCall = (params) => {
-
-  return new Promise((resolve, reject) => {
-    fetch(params.url, params.httpObj).then((response) => response.json())
-      .then((responseJson) => {
-        resolve(responseJson);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  })
-
-}
-*/
+export { getUsers };

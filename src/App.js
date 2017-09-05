@@ -9,6 +9,27 @@ import {
 } from 'react-router-dom'
 import Home from './home/home';
 import Login from './login/login';
+import {getUsers} from './home/homeService';
+import {createStore} from 'redux';
+
+const reducer = (state, action) => {
+  if(action.type === "INC"){
+    return state + action.payload;
+  }
+  if(action.type === "DEC"){
+    return state - action.payload;
+  }
+  return state;
+}
+
+const store = createStore(reducer, 0);
+store.subscribe( ()=>{
+  console.log("store changed", store.getState());
+})
+
+store.dispatch({type:"INC", payload:1});
+store.dispatch({type:"INC", payload:2});
+store.dispatch({type:"DEC", payload:3});
 
 /*
 class NoMatch extends Component {
@@ -51,6 +72,13 @@ class App extends Component {
   componentDidMount() {
 		console.log("App loaded");
     this.auth();
+
+    getUsers().then((res)=>{
+      console.log(res);
+    }, (err)=>{
+      console.log(err);
+    })
+
 	}
   auth(){
     this.setState({isLoggedIn:false});

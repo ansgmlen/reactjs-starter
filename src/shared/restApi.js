@@ -4,10 +4,9 @@
  * Making http call
  * @param - params{object}:url{string}, method{string}, headers{object}, body{object}
  */
-var httpCall = (params) => {
-
+var httpCall = (_params) => {
   return new Promise((resolve, reject) => {
-    fetch(params.url, params.httpObj).then((response) => response.json())
+    fetch(_params.url, _params.httpObj).then((response) => response.json())
       .then((responseJson) => {
         resolve(responseJson);
       })
@@ -17,3 +16,5 @@ var httpCall = (params) => {
   })
 
 }
+
+export { httpCall };
